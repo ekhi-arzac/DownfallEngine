@@ -1,0 +1,31 @@
+# Ignore build directories
+/build/
+/bin/
+/obj/
+/out/
+
+# Ignore CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore compiled object files
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.exe
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+
+
+# Ignore user-specific files
+*.user
+*.vcxproj.user
+*.DS_Store
