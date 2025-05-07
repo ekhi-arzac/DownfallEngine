@@ -20,6 +20,35 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glm)
 
+# Fetch Dear ImGui library
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG v1.89.2
+)
+FetchContent_MakeAvailable(imgui)
+
+# Create ImGui library manually since it doesn't provide a CMakeLists.txt
+add_library(imgui STATIC
+    ${imgui_SOURCE_DIR}/imgui.cpp
+    ${imgui_SOURCE_DIR}/imgui_demo.cpp
+    ${imgui_SOURCE_DIR}/imgui_draw.cpp
+    ${imgui_SOURCE_DIR}/imgui_tables.cpp
+    ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
+    ${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
+)
+
+target_include_directories(imgui PUBLIC
+    ${imgui_SOURCE_DIR}
+    ${imgui_SOURCE_DIR}/backends
+)
+
+target_link_libraries(imgui PUBLIC
+    glfw
+    OpenGL::GL
+)
+
 # Include directories for external dependencies
 include_directories(${CMAKE_SOURCE_DIR}/external/glad/include)
 include_directories(${CMAKE_SOURCE_DIR}/external/glfw/include)
@@ -57,6 +86,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     OpenGL::GL
     glm
     ${CMAKE_DL_LIBS}  # Needed for GLAD on some platforms
+    imgui
 )
 
 # Add platform specific libraries if needed

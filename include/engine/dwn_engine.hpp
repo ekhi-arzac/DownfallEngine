@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <stdint.h>
 #include "engine/dwn_window.hpp"
+#include "engine/ui/dwn_ui.hpp"
 
 class DwnEngine {
 public:
@@ -18,6 +19,7 @@ public:
 
 private:
     DwnWindow m_window;
+    DwnUI m_ui;
     double m_delta_time;
     unsigned int m_frames_per_second;
 };
