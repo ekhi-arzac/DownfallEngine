@@ -3,9 +3,17 @@
 #include <memory>
 #include <glad/glad.h>
 
+enum class DwnTextureType {
+    DIFFUSE,
+    SPECULAR,
+    NORMAL,
+    HEIGHT,
+    SHADOW,
+    CUBE_MAP
+};
 class DwnTexture {
 public:
-    DwnTexture(const std::string& file_path, const std::string& tag);
+    DwnTexture(const std::string& file_path, const std::string& tag, const DwnTextureType& type = DwnTextureType::DIFFUSE);
     ~DwnTexture();
 
     void bind() const;
@@ -23,4 +31,5 @@ private:
     int m_height;
     int m_channels;
     std::string tag;
+    DwnTextureType m_type;
 };

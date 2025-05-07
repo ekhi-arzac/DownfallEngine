@@ -4,7 +4,7 @@
 
 #include <stdexcept>
 
-DwnTexture::DwnTexture(const std::string &file_path, const std::string &tag)
+DwnTexture::DwnTexture(const std::string &file_path, const std::string &tag, const DwnTextureType &type) : m_type(type)
 {
     this->tag = tag;
     stbi_set_flip_vertically_on_load(true);
