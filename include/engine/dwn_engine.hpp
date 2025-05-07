@@ -18,4 +18,6 @@ public:
 
 private:
     DwnWindow m_window;
+    double m_delta_time;
+    unsigned int m_frames_per_second;
 };

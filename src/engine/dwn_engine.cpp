@@ -4,7 +4,7 @@
 
 DwnEngine::DwnEngine(const std::string &title, uint32_t width, uint32_t height) : m_window(title, width, height)
 {
-
+    m_delta_time = 0.0f;
 }
 
 
@@ -27,7 +27,10 @@ void DwnEngine::initialize()
 }
 
 void DwnEngine::run()
-{
+{   
+    // get the current time
+    double last_time = glfwGetTime();
+    
     while (!glfwWindowShouldClose(m_window.get())) {
         // Render here
         glClear(GL_COLOR_BUFFER_BIT);
@@ -37,6 +40,11 @@ void DwnEngine::run()
 
         // Poll for and process events
         glfwPollEvents();
+        // Calculate delta time
+        double current_time = glfwGetTime();
+        m_delta_time = current_time - last_time;
+        last_time = current_time;
+        m_frames_per_second = static_cast<uint32_t>(1.0 / m_delta_time);
     }
 }
 
