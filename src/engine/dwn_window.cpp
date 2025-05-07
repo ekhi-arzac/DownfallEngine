@@ -1,7 +1,7 @@
 #include "engine/dwn_window.hpp"
 #include <stdexcept>
 
-DwnWindow::DwnWindow(const std::string &title, uint32_t width, uint32_t height) : m_width(width), m_height(height), m_title(title), m_window(nullptr, [](GLFWwindow* window) {
+DwnWindow::DwnWindow(const std::string &title, uint32_t width, uint32_t height) : m_title(title), m_width(width), m_height(height), m_window(nullptr, [](GLFWwindow* window) {
     if (window) {
         glfwDestroyWindow(window);
     }

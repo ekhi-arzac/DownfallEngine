@@ -17,8 +17,8 @@ public:
 private:
     std::unique_ptr<GLFWwindow, void(*)(GLFWwindow*)> m_window;
     std::string m_title;
-    int m_width;
-    int m_height;
+    uint32_t m_width;
+    uint32_t m_height;
 
 
 };

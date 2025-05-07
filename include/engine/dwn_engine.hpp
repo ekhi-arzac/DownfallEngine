@@ -7,7 +7,6 @@
 
 class DwnEngine {
 public:
-    const static DwnEngine* instance();
     DwnEngine(const std::string &title, uint32_t width, uint32_t height);
     ~DwnEngine();
 
@@ -19,5 +18,4 @@ public:
 
 private:
     DwnWindow m_window;
-    const static DwnEngine* m_instance_ptr;
 };

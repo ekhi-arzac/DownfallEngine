@@ -1,31 +1,32 @@
 #include "engine/dwn_component.hpp"
 
 #include <stdexcept>
-
+#include <algorithm>
 void DwnComponent::remove_child(const std::string& tag) {
-    auto it = std::remove_if(m_children.begin(), m_children.end(), [&tag](const std::unique_ptr<DwnComponent>& child) {
-        return child->tag == tag;
-    });
+    auto it = std::remove_if(m_children.begin(), m_children.end(),
+        [&tag](const std::unique_ptr<DwnComponent>& child) {
+            return child->tag == tag;
+        });
 
-    if (it == m_children.end()) {
-        throw std::runtime_error("Child component with tag " + tag + " not found");
+    if (it != m_children.end()) {
+        m_children.erase(it, m_children.end());
+    } else {
+        throw std::runtime_error("Child component with tag " + tag + " not found.");
     }
-
-    it->get()->m_transform.remove(m_transform); // Remove the transform of the child from the parent, in case someone else will use it
-
-    m_children.erase(it, m_children.end());
+    
 }
 
-void DwnComponent::add_child(DwnComponent& child) {
+void DwnComponent::add_child(std::unique_ptr<DwnComponent> child) {
     
-    child.m_transform.add(m_transform);
-    m_children.push_back(std::make_unique<DwnComponent>(child));
+    child.get()->m_transform.set_position(m_transform.getPosition());
+    m_children.push_back(std::move(child));
 }
 
 
 void DwnComponent::update_transform() {
-    for (const auto& child : m_children) {
-        child->m_transform.update();
+    this->m_transform.update();
+    for (auto& child : m_children) {
+        child->update_transform();
     }
 }
 

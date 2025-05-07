@@ -4,19 +4,10 @@
 
 DwnEngine::DwnEngine(const std::string &title, uint32_t width, uint32_t height) : m_window(title, width, height)
 {
-    if (m_instance_ptr) {
-        throw std::runtime_error("DwnEngine instance already exists");
-    }
-    m_instance_ptr = this;
+
 }
 
-const DwnEngine* DwnEngine::instance()
-{
-    if (!m_instance_ptr) {
-        throw std::runtime_error("DwnEngine instance not created yet");
-    }
-    return m_instance_ptr;
-}
+
 
 DwnEngine::~DwnEngine()
 {

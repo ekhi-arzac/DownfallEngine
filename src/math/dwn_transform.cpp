@@ -1,4 +1,7 @@
-#include "dwn_transform.hpp"
+#include "math/dwn_transform.hpp"
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/euler_angles.hpp>
 
 void DwnTransform::update()
 {
@@ -32,5 +35,6 @@ void DwnTransform::remove(const DwnTransform &transform)
 
 const glm::mat4& DwnTransform::get_view_matrix() const {
     glm::mat4 view = glm::lookAt(m_position, m_position + m_forward, m_up);
-    return view * glm::scale(glm::mat4(1.0f), m_scale);
+    const auto result = view * glm::scale(glm::mat4(1.0f), m_scale);
+    return result;
 }
