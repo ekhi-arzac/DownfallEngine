@@ -10,9 +10,9 @@
 #include <glm/vec3.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
-#include "dwn_mesh.hpp"
+#include "engine/dwn_mesh.hpp"
 
-Mesh::Mesh(const std::string &tag, const std::string &path) : m_tag(tag)
+DwnMesh::DwnMesh(const std::string &tag, const std::string &path) : m_tag(tag)
 {
     // Load the mesh from the .obj file
     std::ifstream file(path);
@@ -78,14 +78,14 @@ Mesh::Mesh(const std::string &tag, const std::string &path) : m_tag(tag)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
-void Mesh::bind() const
+void DwnMesh::bind() const
 {
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 }
 
-void Mesh::unbind() const
+void DwnMesh::unbind() const
 {
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

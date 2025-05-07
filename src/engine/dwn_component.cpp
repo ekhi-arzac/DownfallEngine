@@ -5,7 +5,7 @@
 
 void DwnComponent::remove_child(const std::string& tag) {
     auto it = std::remove_if(m_children.begin(), m_children.end(),
-        [&tag](const std::unique_ptr<DwnComponent>& child) {
+        [&tag](const std::shared_ptr<DwnComponent>& child) {
             return child->tag == tag;
         });
 
@@ -17,7 +17,7 @@ void DwnComponent::remove_child(const std::string& tag) {
     
 }
 
-void DwnComponent::add_child(std::unique_ptr<DwnComponent> child) {
+void DwnComponent::add_child(std::shared_ptr<DwnComponent> child) {
     
     child.get()->m_transform.set_position(m_transform.getPosition());
     m_children.push_back(std::move(child));

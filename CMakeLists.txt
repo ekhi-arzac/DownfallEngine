@@ -23,6 +23,7 @@ FetchContent_MakeAvailable(glm)
 # Include directories for external dependencies
 include_directories(${CMAKE_SOURCE_DIR}/external/glad/include)
 include_directories(${CMAKE_SOURCE_DIR}/external/glfw/include)
+
 include_directories(${CMAKE_SOURCE_DIR}/include)
 file(GLOB_RECURSE INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/include/*")
 foreach(INCLUDE_DIR ${INCLUDE_DIRS})
