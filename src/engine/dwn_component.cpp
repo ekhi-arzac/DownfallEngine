@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 #include <algorithm>
+
 void DwnComponent::remove_child(const std::string& tag) {
     auto it = std::remove_if(m_children.begin(), m_children.end(),
         [&tag](const std::unique_ptr<DwnComponent>& child) {

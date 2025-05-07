@@ -10,6 +10,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
+#include "dwn_mesh.hpp"
 
 Mesh::Mesh(const std::string &tag, const std::string &path) : m_tag(tag)
 {
@@ -76,5 +77,17 @@ Mesh::Mesh(const std::string &tag, const std::string &path) : m_tag(tag)
     // Unbind the VBO and EBO
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    
+}
+void Mesh::bind() const
+{
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+}
+
+void Mesh::unbind() const
+{
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

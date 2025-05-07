@@ -12,6 +12,9 @@ public:
      * @details The path should be relative to the current working directory.
      */
     Mesh(const std::string& tag, const std::string& path);
+
+    void bind() const;
+    void unbind() const;
 private:
     
     uint32_t VAO, VBO, EBO;
