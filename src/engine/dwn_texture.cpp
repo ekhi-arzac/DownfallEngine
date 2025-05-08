@@ -1,6 +1,6 @@
 #include "engine/dwn_texture.hpp"
 #define STB_IMAGE_IMPLEMENTATION
-#include "engine/stb_image.h"
+#include <stb_image.h>
 
 #include <stdexcept>
 
