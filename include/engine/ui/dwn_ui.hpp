@@ -12,5 +12,6 @@ class DwnUI {
 public:
     DwnUI();
     void initialize(const DwnWindow& window);
+    void render();
 
 };
