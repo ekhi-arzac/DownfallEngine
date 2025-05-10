@@ -10,6 +10,8 @@ public:
 
     T& get(const std::string& tag);
     void add(const std::string& tag, std::shared_ptr<T> resource);
+    void release(const std::string& tag);
+    
 private:
     DwnManager() = default;
     ~DwnManager() = default;

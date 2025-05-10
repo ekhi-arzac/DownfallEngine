@@ -28,20 +28,29 @@ void log_output(GLuint shader, const std::string& type) {
     }
 }
 
-DwnShader::DwnShader(const std::string& tag, const std::string &vertex_path, const std::string &fragment_path) : m_tag(tag)
+DwnShader::DwnShader(const std::string& tag, const std::string &vertex_path, const std::string &fragment_path) 
+    : DwnResource("", tag), m_vertex_path(vertex_path), m_fragment_path(fragment_path), m_program_id(0)
+{
+    load();
+}
+
+DwnShader::~DwnShader()
+{
+    release();
+}
+
+void DwnShader::load()
 {
     // 1. Retrieve the vertex/fragment source code from filePath
     std::string vertex_code;
     std::string fragment_code;
-    std::ifstream v_shader_file(vertex_path
-        , std::ios::in);
-    std::ifstream f_shader_file(fragment_path 
-        , std::ios::in);
+    std::ifstream v_shader_file(m_vertex_path, std::ios::in);
+    std::ifstream f_shader_file(m_fragment_path, std::ios::in);
     if (!v_shader_file.is_open()) {
-        throw std::runtime_error("Failed to open vertex shader file: " + vertex_path);
+        throw std::runtime_error("Failed to open vertex shader file: " + m_vertex_path);
     }
     if (!f_shader_file.is_open()) {
-        throw std::runtime_error("Failed to open fragment shader file: " + fragment_path);
+        throw std::runtime_error("Failed to open fragment shader file: " + m_fragment_path);
     }
 
     std::stringstream v_shader_stream;
@@ -85,8 +94,22 @@ DwnShader::DwnShader(const std::string& tag, const std::string &vertex_path, con
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 }
-DwnShader::~DwnShader()
+
+void DwnShader::release()
 {
-    glDeleteProgram(m_program_id);
+    if (m_program_id != 0) {
+        glDeleteProgram(m_program_id);
+        m_program_id = 0;
+    }
+}
+
+void DwnShader::bind() const
+{
+    glUseProgram(m_program_id);
+}
+
+void DwnShader::unbind() const
+{
+    glUseProgram(0);
 }
 
