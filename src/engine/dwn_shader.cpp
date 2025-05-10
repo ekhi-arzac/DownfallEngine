@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "dwn_shader.hpp"
 
 void log_output(GLuint shader, const std::string& type) {
     int success;
@@ -100,6 +101,16 @@ void DwnShader::release()
     if (m_program_id != 0) {
         glDeleteProgram(m_program_id);
         m_program_id = 0;
+    }
+}
+
+void DwnShader::set_uniform(const std::string &name, const glm::mat4 &value)
+{
+    GLint location = glGetUniformLocation(m_program_id, name.c_str());
+    if (location != -1) {
+        glUniformMatrix4fv(location, 1, GL_FALSE, &value[0][0]);
+    } else {
+        std::cerr << "Warning: uniform '" << name << "' not found in shader program." << std::endl;
     }
 }
 

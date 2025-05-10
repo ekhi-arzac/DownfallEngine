@@ -2,7 +2,6 @@
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/euler_angles.hpp>
-#include "dwn_transform.hpp"
 
 void DwnTransform::update()
 {
