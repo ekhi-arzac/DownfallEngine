@@ -1,6 +1,6 @@
 # DownfallEngine
 
-A custom game engine built with modern C++ and OpenGL.
+A custom graphic engine built with modern C++ and OpenGL.
 
 ## Features
 
