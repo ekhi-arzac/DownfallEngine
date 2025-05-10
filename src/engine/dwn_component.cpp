@@ -31,8 +31,3 @@ void DwnComponent::update_transform() {
     }
 }
 
-void DwnComponent::translate(const glm::vec3& translation) {
-    m_transform.translate(translation);
-    update_transform();
-}
-

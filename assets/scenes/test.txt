@@ -1,0 +1,23 @@
+resources
+    mesh
+        tag "teapot"
+        file "assets/objects/teapot.obj"
+    end
+
+    shader
+        tag "test"
+        vertex "assets/shaders/test.vert"
+        fragment "assets/shaders/test.frag"
+    end
+end
+
+objects
+    tag "root"
+    mesh "teapot"
+    shader "test"
+    transform
+        position 0 0 0
+        rotation 0 0 0
+        scale 1 1 1
+    end
+end

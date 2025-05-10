@@ -11,7 +11,7 @@
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
 #include "engine/dwn_mesh.hpp"
-#include "dwn_shader.hpp"
+#include "engine/dwn_shader.hpp"
 
 DwnMesh::DwnMesh(const std::string &tag, const std::string &path) : m_tag(tag)
 {
