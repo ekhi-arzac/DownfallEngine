@@ -30,7 +30,7 @@ public:
     void translate(const glm::vec3& translation);
     void add(const DwnTransform& transform);
     void remove(const DwnTransform& transform);
-
+    const glm::mat4& get_model_matrix() const;
     const glm::mat4& get_view_matrix() const;
 
 };
