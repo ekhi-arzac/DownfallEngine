@@ -12,6 +12,7 @@
 #include <glm/vec4.hpp>
 #include "engine/dwn_mesh.hpp"
 #include "engine/dwn_shader.hpp"
+#include "dwn_mesh.hpp"
 
 DwnMesh::DwnMesh(const std::string &tag, const std::string &path) : m_tag(tag)
 {
@@ -48,9 +49,10 @@ DwnMesh::DwnMesh(const std::string &tag, const std::string &path) : m_tag(tag)
             uint32_t vertexIndex[3], uvIndex[3], normalIndex[3];
             char slash;
             for (int i = 0; i < 3; ++i) {
-                iss >> vertexIndex[i] >> slash >> uvIndex[i] >> slash >> normalIndex[i];
-                indices.push_back(vertexIndex[i] - 1); // OBJ indices are 1-based
+            iss >> vertexIndex[i] >> slash >> uvIndex[i] >> slash >> normalIndex[i];
+            indices.push_back(vertexIndex[i] - 1); // OBJ indices are 1-based
             }
+            m_index_count += 3; // Increment the index count by 3 for each face
         }
     }
 
@@ -84,6 +86,11 @@ void DwnMesh::bind() const
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+}
+
+void DwnMesh::draw() const
+{
+    glDrawElements(GL_TRIANGLES, m_index_count, GL_UNSIGNED_INT, nullptr);
 }
 
 void DwnMesh::unbind() const

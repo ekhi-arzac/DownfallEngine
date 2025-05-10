@@ -9,11 +9,14 @@
 #include "engine/dwn_camera.hpp"
 #include "engine/dwn_shader.hpp"
 
+#include "engine/resources/dwn_scene.hpp"
+
 class DwnRenderer {
 public:
     static DwnRenderer& instance();
     
     void initialize();
+    void set_active_scene(std::unique_ptr<DwnScene> scene);
     void begin_scene(const DwnCamera& camera);
     void end_scene();
     
@@ -38,4 +41,7 @@ private:
     std::vector<std::shared_ptr<DwnObject>> m_render_queue;
     glm::mat4 m_view_projection_matrix;
     glm::vec4 m_clear_color{0.1f, 0.1f, 0.1f, 1.0f};
+
+    std::unique_ptr<DwnScene> m_active_scene;
+
 };

@@ -1,6 +1,7 @@
 #include "engine/dwn_renderer.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include "dwn_renderer.hpp"
 
 DwnRenderer& DwnRenderer::instance() {
     static DwnRenderer instance;
@@ -19,7 +20,12 @@ void DwnRenderer::initialize() {
     std::cout << "GPU: " << glGetString(GL_RENDERER) << std::endl;
 }
 
-void DwnRenderer::begin_scene(const DwnCamera& camera) {
+void DwnRenderer::set_active_scene(std::unique_ptr<DwnScene> scene) {
+    m_active_scene = std::move(scene);
+}
+
+void DwnRenderer::begin_scene(const DwnCamera &camera)
+{
     m_view_projection_matrix = camera.get_view_projection_matrix();
     
     // Clear the screen
@@ -67,9 +73,8 @@ void DwnRenderer::flush() {
         // Bind the mesh
         mesh->bind();
         
-        // Draw the mesh - using direct OpenGL calls since we don't have get_index_count()
-        // This assumes the mesh binds the correct VAO and properly sets up its vertex attributes
-        glDrawElements(GL_TRIANGLES, 0, GL_UNSIGNED_INT, nullptr);  // The count will be determined by the bound buffer
+        // Draw the mesh using our optimized draw method
+        mesh->draw();
         
         // Unbind everything
         mesh->unbind();

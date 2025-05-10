@@ -16,9 +16,11 @@ public:
     DwnMesh(const std::string& tag, const std::string& path);
 
     void bind() const;
+    void draw() const;
     void unbind() const;
 private:
     
     uint32_t VAO, VBO, EBO;
+    uint32_t m_index_count;
     const std::string m_tag;
 };
