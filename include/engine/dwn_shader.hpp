@@ -22,6 +22,11 @@ public:
     uint32_t get_program_id() const { return m_program_id; }
 
     void set_uniform(const std::string& name, const glm::mat4& value);
+    void set_uniform(const std::string& name, const glm::vec3& value);
+    void set_uniform(const std::string& name, const glm::vec4& value);
+    void set_uniform(const std::string& name, float value);
+    void set_uniform(const std::string& name, int value);
+    
 
 
 private:

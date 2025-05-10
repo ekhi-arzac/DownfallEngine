@@ -114,6 +114,46 @@ void DwnShader::set_uniform(const std::string &name, const glm::mat4 &value)
     }
 }
 
+void DwnShader::set_uniform(const std::string &name, const glm::vec3 &value)
+{
+    GLint location = glGetUniformLocation(m_program_id, name.c_str());
+    if (location != -1) {
+        glUniform3fv(location, 1, &value[0]);
+    } else {
+        std::cerr << "Warning: uniform '" << name << "' not found in shader program." << std::endl;
+    }
+}
+
+void DwnShader::set_uniform(const std::string &name, const glm::vec4 &value)
+{
+    GLint location = glGetUniformLocation(m_program_id, name.c_str());
+    if (location != -1) {
+        glUniform4fv(location, 1, &value[0]);
+    } else {
+        std::cerr << "Warning: uniform '" << name << "' not found in shader program." << std::endl;
+    }
+}
+
+void DwnShader::set_uniform(const std::string &name, float value)
+{
+    GLint location = glGetUniformLocation(m_program_id, name.c_str());
+    if (location != -1) {
+        glUniform1f(location, value);
+    } else {
+        std::cerr << "Warning: uniform '" << name << "' not found in shader program." << std::endl;
+    }
+}
+
+void DwnShader::set_uniform(const std::string &name, int value)
+{
+    GLint location = glGetUniformLocation(m_program_id, name.c_str());
+    if (location != -1) {
+        glUniform1i(location, value);
+    } else {
+        std::cerr << "Warning: uniform '" << name << "' not found in shader program." << std::endl;
+    }
+}
+
 void DwnShader::bind() const
 {
     glUseProgram(m_program_id);
