@@ -16,10 +16,25 @@ class DwnObject : public DwnComponent {
             m_shader = shader;
         }
 
+        std::shared_ptr<DwnMesh> get_mesh() const {
+            return m_mesh;
+        }
+        std::shared_ptr<DwnShader> get_shader() const {
+            return m_shader;
+        }
+        std::shared_ptr<DwnTexture> get_texture() const {
+            return m_texture;
+        }
+        std::shared_ptr<DwnMaterial> get_material() const {
+            return m_material;
+        }
+
+
 
 private:
     std::shared_ptr<DwnMesh> m_mesh;
     std::shared_ptr<DwnTexture> m_texture;
     std::shared_ptr<DwnShader> m_shader;
+    std::shared_ptr<DwnMaterial> m_material;
     bool m_is_visible = true;
 };
